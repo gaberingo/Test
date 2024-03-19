@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="service_team_view_tree" model="ir.ui.view">
+        <field name="name">service.team.tree</field>
+        <field name="model">service.team</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="team_leader"/>
+                <field name="team_members" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="service_team_view_form" model="ir.ui.view">
+        <field name="name">service.team.form</field>
+        <field name="model">service.team</field>
+        <field name="arch" type="xml">
+            <form string="Service Team">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="team_leader"/>
+                    </group>
+                    <notebook>
+                        <page name="team_members" string="Team Members">
+                            <field name="team_members">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="phone"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_service_team" model="ir.actions.act_window">
+        <field name="name">Service Team</field>
+        <field name="res_model">service.team</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new service team
+            </p>
+        </field>
+    </record>
+</odoo>

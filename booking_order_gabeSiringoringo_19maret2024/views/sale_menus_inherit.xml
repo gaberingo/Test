@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem 
+        id="booking_menu" 
+        name="Booking"
+        parent="sale.sale_menu_root"
+        sequence="10"
+    >
+        <menuitem 
+            id="booking_order_menu" 
+            name="Booking Orders" 
+            action="action_booking_orders" 
+            sequence="10"
+        />
+        <menuitem 
+            id="work_order_menu" 
+            name="Work Order" 
+            action="action_work_order" 
+            sequence="20"
+        />
+        <menuitem 
+            id="service_team_menu"
+            name="Service Team" 
+            action="booking_order_gabeSiringoringo_19maret2024.action_service_team" 
+            sequence="30"
+        />
+    </menuitem>
+</odoo>

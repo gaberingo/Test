@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_work_order_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="row">
+                    <table
+                        class="table table-bordered"
+                        style="table-layout: fixed"
+                        id="data"
+                    >
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th
+                                    class="d-table-cell align-middle"
+                                    colspan="4"
+                                    style="width: 3em;"
+                                ><t t-esc="doc.name"/></th>
+                            </tr>
+                            <tr>
+                                <th
+                                    class="d-table-cell align-middle"
+                                >Team Name</th>
+                                <th
+                                    class="d-table-cell align-middle"
+                                ><t t-esc="doc.service_team.name"/></th>
+                                <th
+                                    class="d-table-cell align-middle"
+                                >Customer</th>
+                                <th
+                                    class="d-table-cell align-middle"
+                                ><t t-esc="doc.bo_ref.partner_id.name"/></th>
+                            </tr>
+                            <tr>
+                                <th
+                                    class="d-table-cell align-middle"
+                                >Booking Order Ref</th>
+                                <th
+                                    class="d-table-cell align-middle"
+                                ><t t-esc="doc.bo_ref.name"/></th>
+                                <th
+                                    class="d-table-cell align-middle"
+                                >Date</th>
+                                <th
+                                    class="d-table-cell align-middle"
+                                ><t t-esc="doc.date_start"/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td
+                                    class="d-table-cell align-middle"
+                                    colspan="4"
+                                >Notes :<br/><t t-esc="doc.notes"/></td>
+                            </tr>
+                            <tr>
+                                <td
+                                    class="d-table-cell align-middle"
+                                    colspan="4"
+                                >Signature :</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="report_work_order">
+        <t t-set="data_report_landscape" t-value="True" />
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t
+                    t-call="booking_order_gabeSiringoringo_19maret2024.report_work_order_document"
+                    t-lang="doc.env.lang"
+                />
+            </t>
+        </t>
+    </template>
+</odoo>

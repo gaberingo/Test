@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="work_order_view_tree" model="ir.ui.view">
+        <field name="name">work.order.tree</field>
+        <field name="model">work.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="bo_ref"/>
+                <field name="service_team"/>
+                <field name="team_lead"/>
+                <field name="team_members"/>
+                <field name="planned_start"/>
+                <field name="planned_end"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="state"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="work_order_view_form" model="ir.ui.view">
+        <field name="name">work.order.form</field>
+        <field name="model">work.order</field>
+        <field name="arch" type="xml">
+            <form string="Service Team">
+                <header>
+                    <button 
+                        name="action_start_work" 
+                        type="object" 
+                        string="Start Work" 
+                        class="oe_highlight" 
+                        invisible="state != 'pending'"
+                    />
+                    <button 
+                        name="action_end_work" 
+                        type="object" 
+                        string="End Work" 
+                        class="oe_highlight" 
+                        invisible="state != 'in_progress'"
+                    />
+                    <button 
+                        name="action_reset" 
+                        type="object" 
+                        string="Reset" 
+                        class="oe_highlight" 
+                        invisible="state != 'in_progress'"
+                    />
+                    <button 
+                        name="action_cancel" 
+                        type="object" 
+                        string="Cancel" 
+                        class="oe_highlight"
+                    />
+                    <field name="state" widget="statusbar" statusbar_visible="pending,in_progress,done,cancel"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" class="oe_inline"/></h1>
+                    </div>
+                    <group>
+                        <field name="bo_ref"/>
+                    </group>
+                    <notebook>
+                        <page name="service_team" string="Service Team">
+                            <group class="col-6">
+                                <field name="service_team"/>
+                                <field name="team_lead"/>
+                                <field name="team_members">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="phone"/>
+                                        <field name="email"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page name="planned" string="Planned">
+                            <group>
+                                <group class="col-6">
+                                    <field name="planned_start"/>
+                                    <field name="planned_end"/>
+                                </group>
+                                <group class="col-6">
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <field name="notes" nolabel="1" placeholder="Add a reason..."/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_work_order_kanban" model="ir.ui.view">
+        <field name="name">Work Order Kanban</field>
+        <field name="model">work.order</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <field name="service_team"/>
+                            </div>
+                            <div class="o_kanban_details">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <field name="planned_start"/>
+                                    <field name="planned_end"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_work_order_calendar" model="ir.ui.view">
+        <field name="name">Work Order Calendar</field>
+        <field name="model">work.order</field>
+        <field name="arch" type="xml">
+            <calendar string="Work Orders" date_start="planned_start" date_stop="planned_end">
+                <field name="name"/>
+                <field name="service_team"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_work_order_graph" model="ir.ui.view">
+        <field name="name">Work Order Graph</field>
+        <field name="model">work.order</field>
+        <field name="arch" type="xml">
+            <graph string="Work Order Analysis" type="bar">
+                <field name="service_team"/>
+                <field name="state" type="row"/>
+                <field name="id" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_work_order_pivot" model="ir.ui.view">
+        <field name="name">Work Order Pivot</field>
+        <field name="model">work.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Work Order Pivot">
+                <field name="service_team" type="row"/>
+                <field name="state" type="col"/>
+                <field name="id" type="measure" operator="count"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_work_order" model="ir.actions.act_window">
+        <field name="name">Work Order</field>
+        <field name="res_model">work.order</field>
+        <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new Work Order
+            </p>
+        </field>
+    </record>
+</odoo>

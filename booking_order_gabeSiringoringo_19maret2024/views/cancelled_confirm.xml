@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- View for cancellation popup -->
+    <record id="view_cancellation_popup_form" model="ir.ui.view">
+        <field name="name">cancellation.popup.form</field>
+        <field name="model">cancellation.popup</field>
+        <field name="arch" type="xml">
+            <form string="Reason for Cancellation">
+                <group>
+                    <field name="reason" widget="text" placeholder="Enter reason for cancellation"/>
+                </group>
+                <footer>
+                    <button name="confirm_cancel" string="Confirm" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

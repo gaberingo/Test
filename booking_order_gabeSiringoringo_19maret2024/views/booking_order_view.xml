@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_booking_orders" model="ir.actions.act_window">
+        <field name="name">Booking Order</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_is_booking_order': True}</field>
+        <field name="domain">[('is_booking_order','=', True)]</field>
+    </record>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_service_team_user,access.service.team.user,model_service_team,base.group_user,1,1,1,1
+access_work_order_user,access.work.order.user,model_work_order,base.group_user,1,1,1,1
+access_cancel_order_user,access.cancel.order.user,model_cancellation_popup,base.group_user,1,1,1,1
